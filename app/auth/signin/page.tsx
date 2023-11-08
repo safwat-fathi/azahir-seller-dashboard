@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-const SignIn: React.FC = () => {
+const SignIn = () => {
   return (
     <>
       <Breadcrumb pageName="Sign In" />

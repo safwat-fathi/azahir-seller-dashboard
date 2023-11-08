@@ -8,7 +8,7 @@ interface ChartFourState {
   series: { data: number[] }[];
 }
 
-const ChartFour: React.FC = () => {
+const ChartFour = () => {
   const [state, setState] = useState<ChartFourState>({
     series: [
       {
@@ -23,7 +23,7 @@ const ChartFour: React.FC = () => {
 
   // Update the state
   const updateState = () => {
-    setState((prevState) => ({
+    setState(prevState => ({
       ...prevState,
       // Update the desired properties
     }));

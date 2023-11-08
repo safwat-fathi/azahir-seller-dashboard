@@ -2,7 +2,9 @@
 import { ApexOptions } from "apexcharts";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 interface ChartThreeState {
   series: number[];
@@ -50,7 +52,7 @@ const options: ApexOptions = {
   ],
 };
 
-const ChartThree: React.FC = () => {
+const ChartThree = () => {
   const [state, setState] = useState<ChartThreeState>({
     series: [65, 34, 12, 56],
   });

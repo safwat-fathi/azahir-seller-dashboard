@@ -3,13 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { Metadata } from "next";
+
 export const metadata: Metadata = {
   title: "Signup Page | Next.js E-commerce Dashboard Template",
   description: "This is Signup page for TailAdmin Next.js",
   // other metadata
 };
 
-const SignUp: React.FC = () => {
+const SignUp = () => {
   return (
     <>
       <Breadcrumb pageName="Sign Up" />

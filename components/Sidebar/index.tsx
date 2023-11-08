@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -123,7 +124,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             pathname.includes("dashboard")) &&
                           "bg-graydark dark:bg-meta-4"
                         }`}
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           sidebarExpanded
                             ? handleClick()
@@ -273,7 +274,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             pathname.includes("forms")) &&
                           "bg-graydark dark:bg-meta-4"
                         }`}
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           sidebarExpanded
                             ? handleClick()
@@ -511,7 +512,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           (pathname === "/ui" || pathname.includes("ui")) &&
                           "bg-graydark dark:bg-meta-4"
                         }`}
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           sidebarExpanded
                             ? handleClick()
@@ -621,7 +622,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           (pathname === "/auth" || pathname.includes("auth")) &&
                           "bg-graydark dark:bg-meta-4"
                         }`}
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           sidebarExpanded
                             ? handleClick()

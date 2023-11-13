@@ -14,7 +14,7 @@ import Demo from "./Demo";
 
 export const metadata: Metadata = {
   title: {
-    template: "Azahir Seller | %s",
+    template: "%s | Azahir dashboard",
     default: "Azahir Seller",
   },
   description: "Azahir Seller Admin Dashboard",

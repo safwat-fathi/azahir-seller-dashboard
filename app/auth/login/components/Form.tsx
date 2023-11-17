@@ -6,12 +6,16 @@ import Link from "next/link";
 
 const LoginForm = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("submit form");
+    try {
+      e.preventDefault();
+      console.log("submit form");
 
-    await authService.login();
+      await authService.login();
 
-    console.log(" form submitted");
+      console.log(" form submitted");
+    } catch (err) {
+      console.log("🚀 ~ handleSubmit ~ err:", err);
+    }
   };
 
   return (

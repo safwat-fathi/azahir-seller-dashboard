@@ -3,24 +3,15 @@ import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { Metadata } from "next";
 import authService from "../services/auth.service";
-import { FormEvent } from "react";
 import LoginForm from "./components/Form";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Login Page",
   description: "This is login page for Azahir dashboard",
 };
 
-const Login = () => {
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("submit form");
-
-    await authService.login();
-
-    console.log(" form submitted");
-  };
-
+const Login = async () => {
   return (
     <>
       <Breadcrumb pageName="Sign In" />

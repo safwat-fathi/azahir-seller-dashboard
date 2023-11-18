@@ -38,7 +38,7 @@ class AuthService {
       throw err;
       // console.log("🚀 ~ login ~ err:", err);
       // throw new Error(`Error::AuthService::login::${err}`);
-      // redirect("/auth/signup");
+      // redirect("/signup");
     }
   }
 }

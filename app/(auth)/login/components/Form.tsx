@@ -3,18 +3,22 @@
 import { FormEvent } from "react";
 import authService from "../../services/auth.service";
 import Link from "next/link";
+import { HttpError } from "@/lib/classes/http-error";
 
 const LoginForm = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      console.log("submit form");
+      console.log("awdawd");
 
-      await authService.login();
+      // console.log("submit form");
 
-      console.log(" form submitted");
-    } catch (err) {
-      console.log("🚀 ~ handleSubmit ~ err:", err);
+      // await authService.login();
+
+      // console.log(" form submitted");
+      throw new HttpError(401, "Unauthorized");
+    } catch (err: any) {
+      console.log("🚀 ~ handleSubmit ~ err:", err.status);
     }
   };
 
@@ -134,7 +138,7 @@ const LoginForm = () => {
       <div className="mt-6 text-center">
         <p>
           Don’t have any account?{" "}
-          <Link href="/auth/signup" className="text-primary">
+          <Link href="/signup" className="text-primary">
             Sign Up
           </Link>
         </p>

@@ -1,3 +1,4 @@
+import { HttpError } from "@/lib/classes/http-error";
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
@@ -28,20 +29,23 @@ export default class HttpClient {
 
       if (!response.ok) {
         if (response.status === 401) {
-          throw {
-            message: `HttpClient::Unauthenticated error`,
-            code: response.status,
-          };
+          // throw {
+          //   message: `HttpClient::Unauthenticated error`,
+          //   code: response.status,
+          // };
+          throw new HttpError(401, "Unauthorized");
         }
 
         if (response.status === 500) {
-          throw {
-            message: `HttpClient::Server error`,
-            code: response.status,
-          };
+          // throw {
+          //   message: `HttpClient::Server error`,
+          //   code: response.status,
+          // };
+          throw new HttpError(500, "Unauthorized");
         }
 
-        throw { message: `HttpClient::HTTP error`, code: response.status };
+        // throw { message: `HttpClient::HTTP error`, code: response.status };
+        throw new HttpError(response.status, response.statusText);
       }
 
       return response.json();

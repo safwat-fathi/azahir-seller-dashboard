@@ -1,5 +1,4 @@
 import HttpClient from "@/services/http-client.service";
-import { redirect } from "next/navigation";
 
 const httpClient = new HttpClient();
 
@@ -36,9 +35,6 @@ class AuthService {
       return res;
     } catch (err) {
       throw err;
-      // console.log("🚀 ~ login ~ err:", err);
-      // throw new Error(`Error::AuthService::login::${err}`);
-      // redirect("/signup");
     }
   }
 }

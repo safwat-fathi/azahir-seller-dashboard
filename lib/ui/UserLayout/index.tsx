@@ -30,13 +30,12 @@ export default function UserLayout({ children }: { children: ReactNode }) {
       ) : ( */}
       <div className="flex h-screen overflow-hidden">
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        {/* <SidebarLoader /> */}
 
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-          <div className="flex items-center animate-ping justify-center bg-white">
+          {/* <div className="flex items-center animate-ping justify-center bg-white">
             <div className="h-16 w-16  rounded-full border-4 border-solid border-primary border-t-transparent"></div>
-          </div>
+          </div> */}
           {children}
         </div>
       </div>

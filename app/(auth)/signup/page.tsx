@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const SignUp = () => {
   return (
-    <>
+    <main>
       <div className="flex flex-wrap items-center h-screen">
         <div className="hidden w-full xl:block xl:w-1/2">
           <div className="py-17.5 px-26 text-center">
@@ -51,7 +51,7 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-    </>
+    </main>
   );
 };
 

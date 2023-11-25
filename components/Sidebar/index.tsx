@@ -693,7 +693,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                 pathname === "/login" && "text-white"
                               }`}
                             >
-                              Sign In
+                              Login
                             </Link>
                           </li>
                           <li>
@@ -703,7 +703,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                 pathname === "/signup" && "text-white"
                               }`}
                             >
-                              Sign Up
+                              Signup
                             </Link>
                           </li>
                         </ul>

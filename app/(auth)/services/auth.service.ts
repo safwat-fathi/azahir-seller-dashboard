@@ -1,38 +1,24 @@
 import HttpClient from "@/services/http-client.service";
+import { createToken, destroyToken } from "@/app/(auth)/login/actions";
 
 const httpClient = new HttpClient();
 
 class AuthService {
   public async login() {
     try {
-      const formData = new FormData();
-      formData.append("name", "safwat");
-      formData.append("email", "safwat@test.com");
+      await createToken();
 
-      const data = {
-        name: "safwat",
-        email: "safwat@test.com",
-      };
+      return;
+    } catch (err) {
+      throw err;
+    }
+  }
 
-      const dataStringified = JSON.stringify(data);
+  public async logout() {
+    try {
+      await destroyToken();
 
-      // const res = await httpClient.put(
-      //   "/api/hello",
-      //   { "Accept-Language": "en" },
-      //   formData
-      // );
-      // const res = await httpClient.post(
-      //   "/api/hello",
-      //   { "Accept-Language": "en" },
-      //   formData
-      // );
-      // const res = await httpClient.get("/api/hello", {
-      const res = await httpClient.get("http://localhost:8000/api/products/", {
-        "Accept-Language": "en",
-        cache: "no-store",
-      });
-
-      return res;
+      return;
     } catch (err) {
       throw err;
     }

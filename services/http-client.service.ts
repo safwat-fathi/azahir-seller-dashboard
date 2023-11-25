@@ -1,3 +1,4 @@
+import { destroyToken } from "@/app/(auth)/login/actions";
 import { HttpError } from "@/lib/classes/http-error";
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
@@ -33,6 +34,8 @@ export default class HttpClient {
           //   message: `HttpClient::Unauthenticated error`,
           //   code: response.status,
           // };
+          await destroyToken();
+
           throw new HttpError(401, "Unauthorized");
         }
 

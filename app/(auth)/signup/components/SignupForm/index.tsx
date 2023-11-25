@@ -189,7 +189,7 @@ const SignupForm = () => {
             </defs>
           </svg>
         </span>
-        Sign up with Google
+        Signup with Google
       </button>
 
       <div className="mt-6 text-center">

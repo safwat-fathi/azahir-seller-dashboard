@@ -10,10 +10,11 @@ const LoginForm = () => {
     try {
       e.preventDefault();
 
-      // await authService.login();
+      await authService.login();
 
       // console.log(" form submitted");
-      throw new HttpError(401, "Unauthorized");
+      // throw new HttpError(401, "Unauthorized");
+      console.log("logged in");
     } catch (err: any) {
       console.log("🚀 ~ handleLogin ~ err:", err.status);
     }
@@ -90,7 +91,7 @@ const LoginForm = () => {
       <div className="mb-5">
         <input
           type="submit"
-          value="Sign In"
+          value="Login"
           className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
         />
       </div>
@@ -129,14 +130,14 @@ const LoginForm = () => {
             </defs>
           </svg>
         </span>
-        Sign in with Google
+        Login with Google
       </button>
 
       <div className="mt-6 text-center">
         <p>
           Don’t have any account?{" "}
           <Link href="/signup" className="text-primary">
-            Sign Up
+            Signup
           </Link>
         </p>
       </div>

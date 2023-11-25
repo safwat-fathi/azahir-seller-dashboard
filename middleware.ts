@@ -2,28 +2,35 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export default async function middleware(request: NextRequest) {
-  // console.log("requested URL", request.url);
   const cookies = request.cookies;
-  // const requestHeaders = new Headers(request.headers);
-  // requestHeaders.set("token", "34|hello");
-  const res = NextResponse.next({});
-  if (request.nextUrl.pathname.startsWith("/login")) {
-    res.cookies.set({
-      name: "token",
-      value: "34|hello",
-      path: "/",
-    });
-    console.log("cookies updated");
-  } else {
-    console.log("token:", cookies.get("token"));
-  }
+  const token = cookies.get("token");
 
-  if (request.nextUrl.pathname.startsWith("/about")) {
-    return NextResponse.redirect(new URL("/", request.url));
+  if (token?.value) {
+    console.log("token found!!!!!!!!!!!!");
+    console.log(token.name);
+    console.log(token.value);
+    NextResponse.next();
+  } else {
+    console.log(request.url, "no token found>>>>>>>>>>>>>>");
+
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 }
 
-// See "Matching Paths" below to learn more
-// export const config = {
-//   matcher: "/about/:path*",
-// };
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - static (static files)
+     * - favicon.ico (favicon file)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - static (static files)
+     * - images (static files)
+     * - login (login page)
+     * - signup (signup page)
+     */
+    "/((?!api|_next/static|_next/image|images|favicon.ico|login|signup).*)",
+  ],
+};

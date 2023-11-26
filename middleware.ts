@@ -13,7 +13,7 @@ export default async function middleware(request: NextRequest) {
   } else {
     console.log(request.url, "middleware: no token found>>>>>>>>>>>>>>");
 
-    return NextResponse.redirect(new URL("/login", request.url));
+    // return NextResponse.redirect(new URL("/login", request.url));
   }
 }
 

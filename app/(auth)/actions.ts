@@ -3,10 +3,10 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function createToken() {
+export async function createTokenAction(token: string) {
   cookies().set({
     name: "token",
-    value: "23|awdawdad",
+    value: token,
     // httpOnly: true,
     path: "/",
   });
@@ -14,10 +14,16 @@ export async function createToken() {
   console.log("token created");
 }
 
-export async function destroyToken() {
+export async function destroyTokenAction() {
   console.log("token destroyed");
 
   cookies().delete("token");
 
   redirect("/login");
+}
+
+export async function getTokenAction() {
+  const token = cookies().get("token");
+
+  return token?.value ? token.value : null;
 }

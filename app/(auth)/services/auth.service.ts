@@ -1,12 +1,12 @@
 import HttpClient from "@/services/http-client.service";
-import { createToken, destroyToken } from "@/app/(auth)/login/actions";
+import { createTokenAction, destroyTokenAction } from "../actions";
 
-const httpClient = new HttpClient();
+const httpClient = HttpClient.getInstance();
 
 class AuthService {
   public async login() {
     try {
-      await createToken();
+      await createTokenAction("23|awdawdad");
 
       return;
     } catch (err) {
@@ -16,9 +16,19 @@ class AuthService {
 
   public async logout() {
     try {
-      await destroyToken();
+      await destroyTokenAction();
 
       return;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  public async test() {
+    try {
+      const res = await httpClient.get("http://localhost:8000/api/products");
+
+      return res;
     } catch (err) {
       throw err;
     }

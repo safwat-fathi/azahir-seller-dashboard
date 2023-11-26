@@ -1,10 +1,20 @@
-import { destroyToken } from "@/app/(auth)/login/actions";
+import { destroyTokenAction, getTokenAction } from "@/app/(auth)/actions";
 import { HttpError } from "@/lib/classes/http-error";
-import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
 
 export default class HttpClient {
+  private static _instance: HttpClient;
+  private _token: string | null = null;
   private _options: TObj<string> = {};
+
+  private constructor() {}
+
+  public static getInstance() {
+    if (!HttpClient._instance) {
+      HttpClient._instance = new HttpClient();
+    }
+
+    return HttpClient._instance;
+  }
 
   private async _request<T = any>(
     url: string,
@@ -12,12 +22,15 @@ export default class HttpClient {
     options: any
   ): Promise<T | any> {
     try {
-      const token = "oaw9w9da0a-dl";
+      this._token = await getTokenAction();
 
       this._options = {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
         method,
+        headers: {
+          Authorization: `Bearer ${this._token}`,
+          Accept: "application/json",
+          "Accept-Language": "en",
+        },
         ...options,
       };
 
@@ -30,24 +43,15 @@ export default class HttpClient {
 
       if (!response.ok) {
         if (response.status === 401) {
-          // throw {
-          //   message: `HttpClient::Unauthenticated error`,
-          //   code: response.status,
-          // };
-          await destroyToken();
+          await destroyTokenAction();
 
           throw new HttpError(401, "Unauthorized");
         }
 
         if (response.status === 500) {
-          // throw {
-          //   message: `HttpClient::Server error`,
-          //   code: response.status,
-          // };
-          throw new HttpError(500, "Unauthorized");
+          throw new HttpError(500, "Server error");
         }
 
-        // throw { message: `HttpClient::HTTP error`, code: response.status };
         throw new HttpError(response.status, response.statusText);
       }
 
@@ -57,7 +61,7 @@ export default class HttpClient {
     }
   }
 
-  public async get<T = any>(url: string, headers: TObj<string, string>) {
+  public async get<T = any>(url: string, headers?: TObj<string, string>) {
     try {
       return await this._request<T>(url, "GET", headers);
     } catch (err) {
@@ -67,8 +71,8 @@ export default class HttpClient {
 
   public async post<T = any>(
     url: string,
-    headers: TObj<string, string>,
-    body: string | FormData
+    body: string | FormData,
+    headers?: TObj<string, string>
   ) {
     try {
       const options: TObj<string> = { headers, body };
@@ -81,8 +85,8 @@ export default class HttpClient {
 
   public async put<T = any>(
     url: string,
-    headers: TObj<string, string>,
-    body: string | FormData
+    body: string | FormData,
+    headers?: TObj<string, string>
   ) {
     try {
       const options: TObj<string> = { headers, body };
@@ -93,7 +97,7 @@ export default class HttpClient {
     }
   }
 
-  public async delete<T = any>(url: string, headers: TObj<string, string>) {
+  public async delete<T = any>(url: string, headers?: TObj<string, string>) {
     try {
       const options: TObj<string> = { headers };
 

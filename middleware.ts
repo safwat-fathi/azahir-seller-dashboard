@@ -6,12 +6,12 @@ export default async function middleware(request: NextRequest) {
   const token = cookies.get("token");
 
   if (token?.value) {
-    console.log("token found!!!!!!!!!!!!");
-    console.log(token.name);
-    console.log(token.value);
+    console.log("middleware: token found!!!!!!!!!!!!");
+    // console.log(token.name);
+    // console.log(token.value);
     NextResponse.next();
   } else {
-    console.log(request.url, "no token found>>>>>>>>>>>>>>");
+    console.log(request.url, "middleware: no token found>>>>>>>>>>>>>>");
 
     return NextResponse.redirect(new URL("/login", request.url));
   }

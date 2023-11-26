@@ -7,6 +7,8 @@ const Logout = () => {
     await authService.logout();
 
     console.log("logged out");
+    // await authService.test();
+    // console.log("test api");
   };
 
   return (

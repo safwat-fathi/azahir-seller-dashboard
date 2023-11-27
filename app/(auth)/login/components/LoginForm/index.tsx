@@ -1,22 +1,33 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import authService from "../../../services/auth.service";
 import Link from "next/link";
 import { HttpError } from "@/lib/classes/http-error";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
 
+      if (!email || !password) {
+        return;
+      }
+
       await authService.login();
 
-      // console.log(" form submitted");
-      // throw new HttpError(401, "Unauthorized");
-      console.log("logged in");
+      router.push("/");
     } catch (err: any) {
-      console.log("🚀 ~ handleLogin ~ err:", err.status);
+      throw new HttpError(
+        500,
+        err.status ? err.status : "Something went wrong"
+      );
     }
   };
 
@@ -29,6 +40,8 @@ const LoginForm = () => {
         <div className="relative">
           <input
             type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
             placeholder="Enter your email"
             className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
           />
@@ -60,6 +73,8 @@ const LoginForm = () => {
         <div className="relative">
           <input
             type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             placeholder="6+ Characters, 1 Capital letter"
             className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
           />

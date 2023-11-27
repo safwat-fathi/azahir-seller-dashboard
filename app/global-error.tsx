@@ -15,8 +15,8 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
   return (
     <html>
       <body>
-        <h1>Something went wrong!</h1>
-        <button onClick={() => reset()}>Try again</button>
+        <h1>Sorry, something went wrong.</h1>
+        <button onClick={() => reset()}>Try again?</button>
       </body>
     </html>
   );

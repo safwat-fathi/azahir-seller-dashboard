@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Metadata } from "next";
 import AuthImage from "../components/AuthImage";
 import SignupForm from "./components/SignupForm";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Signup | Azahir Seller",
@@ -10,6 +12,13 @@ export const metadata: Metadata = {
 };
 
 const SignUp = () => {
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+
+  if (token?.value) {
+    redirect("/");
+  }
+
   return (
     <main>
       <div className="flex flex-wrap items-center h-screen">

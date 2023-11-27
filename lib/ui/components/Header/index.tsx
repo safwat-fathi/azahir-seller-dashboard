@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import DarkModeSwitcher from "./DarkModeSwitcher";
-import DropdownMessage from "./DropdownMessage";
-import DropdownNotification from "./DropdownNotification";
-import DropdownUser from "./DropdownUser";
 import Image from "next/image";
+import DarkModeSwitcher from "./DarkModeSwitcher";
+import DropdownNotification from "./DropdownNotification";
+import DropdownMessage from "./DropdownMessage";
+import DropdownUser from "./DropdownUser";
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;

@@ -1,4 +1,4 @@
-import HttpClient from "@/services/http-client.service";
+import HttpClient from "@/services/http.service";
 import { createTokenAction, destroyTokenAction } from "../actions";
 
 const httpClient = HttpClient.getInstance();

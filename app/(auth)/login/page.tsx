@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
 import LoginForm from "./components/LoginForm";
 import AuthImage from "../components/AuthImage";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Login Page",
@@ -9,6 +11,13 @@ export const metadata: Metadata = {
 };
 
 const Login = async () => {
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+
+  if (token?.value) {
+    redirect("/");
+  }
+
   return (
     <main>
       <div className="flex flex-wrap items-center h-screen">

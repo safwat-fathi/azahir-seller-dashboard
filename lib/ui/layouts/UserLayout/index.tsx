@@ -1,15 +1,15 @@
 "use client";
 import { useState, useEffect, ReactNode } from "react";
 import dynamic from "next/dynamic";
-import Loader from "@/lib/ui/common/Loader";
-import SidebarLoader from "../common/SidebarLoader";
+import Loader from "@/lib/ui/components/Loader";
+import SidebarLoader from "../../components/SidebarLoader";
 
-const Sidebar = dynamic(() => import("@/components/Sidebar"), {
+const Sidebar = dynamic(() => import("@/lib/ui/components/Sidebar"), {
   ssr: false,
   loading: () => <SidebarLoader />,
 });
 
-const Header = dynamic(() => import("@/components/Header"), {
+const Header = dynamic(() => import("@/lib/ui/components/Header"), {
   ssr: false,
   loading: () => <h1>Loading</h1>,
 });
@@ -33,9 +33,6 @@ export default function UserLayout({ children }: { children: ReactNode }) {
 
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-          {/* <div className="flex items-center animate-ping justify-center bg-white">
-            <div className="h-16 w-16  rounded-full border-4 border-solid border-primary border-t-transparent"></div>
-          </div> */}
           {children}
         </div>
       </div>

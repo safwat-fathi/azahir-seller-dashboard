@@ -1,22 +1,20 @@
 import React, { ReactNode } from "react";
 
-interface CardDataStatsProps {
+interface StatesCardProps {
   title: string;
   total: string;
   rate: string;
-  levelUp?: boolean;
-  levelDown?: boolean;
+  level: "up" | "down";
   children: ReactNode;
 }
 
-const CardDataStats = ({
+const StatesCard = ({
   title,
   total,
   rate,
-  levelUp,
-  levelDown,
+  level = "up",
   children,
-}: CardDataStatsProps) => {
+}: StatesCardProps) => {
   return (
     <div className="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
@@ -33,12 +31,12 @@ const CardDataStats = ({
 
         <span
           className={`flex items-center gap-1 text-sm font-medium ${
-            levelUp && "text-meta-3"
-          } ${levelDown && "text-meta-5"} `}
+            level === "up" ? "text-meta-3" : "text-meta-5"
+          }`}
         >
           {rate}
 
-          {levelUp && (
+          {level === "up" ? (
             <svg
               className="fill-meta-3"
               width="10"
@@ -52,8 +50,7 @@ const CardDataStats = ({
                 fill=""
               />
             </svg>
-          )}
-          {levelDown && (
+          ) : (
             <svg
               className="fill-meta-5"
               width="10"
@@ -74,4 +71,4 @@ const CardDataStats = ({
   );
 };
 
-export default CardDataStats;
+export default StatesCard;

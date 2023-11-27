@@ -1,12 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+import authService from "@/app/(auth)/services/auth.service";
 
 const DropdownUser = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
+
+  const handleLogout = async () => {
+    await authService.logout();
+
+    router.push("/login");
+  };
 
   // close on click outside
   useEffect(() => {
@@ -33,6 +44,12 @@ const DropdownUser = () => {
     document.addEventListener("keydown", keyHandler);
     return () => document.removeEventListener("keydown", keyHandler);
   });
+
+  // close if route changes
+  useEffect(() => {
+    setDropdownOpen(false);
+    console.log(pathname);
+  }, [pathname]);
 
   return (
     <div className="relative">
@@ -133,7 +150,7 @@ const DropdownUser = () => {
           </li>
           <li>
             <Link
-              href="/pages/settings"
+              href="/settings"
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
             >
               <svg
@@ -157,7 +174,10 @@ const DropdownUser = () => {
             </Link>
           </li>
         </ul>
-        <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <button
+          className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+          onClick={handleLogout}
+        >
           <svg
             className="fill-current"
             width="22"

@@ -1,10 +1,11 @@
-import { HTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
-export type ButtonProps = HTMLAttributes<HTMLButtonElement> & {
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
   variant?: TVariant;
   color?: TColor;
   size?: TSize;
+  loading: boolean;
 };
 
 const sizes = {
@@ -32,19 +33,24 @@ const variants: Record<TVariant, Record<TColor, string>> = {
 const baseClasses =
   "inline-flex items-center justify-center rounded-md text-center font-medium hover:bg-opacity-90 transition-all duration-200";
 
+const loadingClasses = "pointer-events-none";
+
 const Button = ({
   children,
   variant = "contained",
   color = "primary",
   size = "sm",
+  className,
+  loading,
   ...props
 }: ButtonProps) => {
   return (
     <button
-      className={`${baseClasses} ${variants[variant][color]} ${sizes[size]}`}
+      disabled={loading}
+      className={`${baseClasses} ${variants[variant][color]} ${sizes[size]} ${className}`}
       {...props}
     >
-      {children}
+      {loading ? "Loading..." : children}
     </button>
   );
 };

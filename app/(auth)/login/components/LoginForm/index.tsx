@@ -1,28 +1,40 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import authService from "../../../services/auth.service";
 import Link from "next/link";
 import { HttpError } from "@/lib/classes/http-error";
 import { useRouter } from "next/navigation";
+import Button from "@/lib/ui/components/Button";
+import { loginSchema } from "./schema";
+
+type LoginInputs = {
+  email: string;
+  password: string;
+};
 
 const LoginForm = () => {
   const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { isLoading },
+  } = useForm<LoginInputs>({
+    resolver: yupResolver(loginSchema),
+  });
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
+  const onSuccess: SubmitHandler<LoginInputs> = async data => {
     try {
-      e.preventDefault();
+      console.log("awd", data);
 
-      if (!email || !password) {
-        return;
-      }
+      // await authService.login();
 
-      await authService.login();
-
-      router.push("/");
+      // router.push("/");
     } catch (err: any) {
       throw new HttpError(
         500,
@@ -31,8 +43,13 @@ const LoginForm = () => {
     }
   };
 
+  const onError: SubmitErrorHandler<LoginInputs> = errs => {
+    console.log("errs::", errs);
+  };
+
   return (
-    <form onSubmit={handleLogin}>
+    // <form onSubmit={e => e.preventDefault()}>
+    <form onSubmit={handleSubmit(onSuccess, onError)}>
       <div className="mb-4">
         <label className="mb-2.5 block font-medium text-black dark:text-white">
           Email
@@ -40,8 +57,7 @@ const LoginForm = () => {
         <div className="relative">
           <input
             type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
+            {...register("email", { required: true })}
             placeholder="Enter your email"
             className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
           />
@@ -73,8 +89,7 @@ const LoginForm = () => {
         <div className="relative">
           <input
             type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+            {...register("password", { required: true })}
             placeholder="6+ Characters, 1 Capital letter"
             className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
           />
@@ -104,11 +119,9 @@ const LoginForm = () => {
       </div>
 
       <div className="mb-5">
-        <input
-          type="submit"
-          value="Login"
-          className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-        />
+        <Button loading={isLoading} type="submit" size="lg" className="w-full">
+          Login
+        </Button>
       </div>
 
       <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">

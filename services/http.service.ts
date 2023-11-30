@@ -2,19 +2,8 @@ import { destroyTokenAction, getTokenAction } from "@/app/(auth)/actions";
 import { HttpError } from "@/lib/classes/http-error";
 
 export default class HttpClient {
-  private static _instance: HttpClient;
   private _token: string | null = null;
   private _options: TObj<string> = {};
-
-  private constructor() {}
-
-  public static getInstance() {
-    if (!HttpClient._instance) {
-      HttpClient._instance = new HttpClient();
-    }
-
-    return HttpClient._instance;
-  }
 
   private async _request<T = any>(
     url: string,

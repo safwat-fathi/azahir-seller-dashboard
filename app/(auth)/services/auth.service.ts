@@ -1,9 +1,11 @@
 import HttpClient from "@/services/http.service";
 import { createTokenAction, destroyTokenAction } from "../actions";
 
-const httpClient = HttpClient.getInstance();
+class AuthService extends HttpClient {
+  constructor() {
+    super();
+  }
 
-class AuthService {
   public async login() {
     try {
       await createTokenAction("23|awdawdad");
@@ -26,7 +28,8 @@ class AuthService {
 
   public async test() {
     try {
-      const res = await httpClient.get("http://localhost:8000/api/products");
+      // const res = await httpClient.get("http://localhost:8000/api/products");
+      const res = await this.get("http://localhost:8000/api/products");
 
       return res;
     } catch (err) {

@@ -3,7 +3,7 @@ import { HttpError } from "@/lib/classes/http-error";
 
 export default class HttpClient {
   private _token: string | null = null;
-  private _options: TObj<string> = {};
+  private _options: RequestInit = {};
 
   private async _request<T = any>(
     url: string,
@@ -19,6 +19,10 @@ export default class HttpClient {
           Authorization: `Bearer ${this._token}`,
           Accept: "application/json",
           "Accept-Language": "en",
+        },
+        cache: "no-store",
+        next: {
+          revalidate: 0,
         },
         ...options,
       };
@@ -64,7 +68,7 @@ export default class HttpClient {
     headers?: TObj<string, string>
   ) {
     try {
-      const options: TObj<string> = { headers, body };
+      const options: RequestInit = { headers, body };
 
       return await this._request<T>(url, "POST", options);
     } catch (err) {
@@ -78,7 +82,7 @@ export default class HttpClient {
     headers?: TObj<string, string>
   ) {
     try {
-      const options: TObj<string> = { headers, body };
+      const options: RequestInit = { headers, body };
 
       return await this._request<T>(url, "PUT", options);
     } catch (err) {
@@ -88,7 +92,7 @@ export default class HttpClient {
 
   public async delete<T = any>(url: string, headers?: TObj<string, string>) {
     try {
-      const options: TObj<string> = { headers };
+      const options: RequestInit = { headers };
 
       return await this._request<T>(url, "DELETE", options);
     } catch (err) {

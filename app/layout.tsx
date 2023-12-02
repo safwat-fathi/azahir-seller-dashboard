@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     default: "Azahir Seller",
   },
   description: "Azahir Seller Admin Dashboard",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

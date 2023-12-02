@@ -1,13 +1,16 @@
 import HttpClient from "@/services/http.service";
 import { createTokenAction, destroyTokenAction } from "../actions";
+import { LoginInputs } from "../login/components/LoginForm";
 
 class AuthService extends HttpClient {
   constructor() {
     super();
   }
 
-  public async login() {
+  public async login(data: LoginInputs) {
     try {
+      console.log("login data:", data);
+
       await createTokenAction("23|awdawdad");
 
       return;

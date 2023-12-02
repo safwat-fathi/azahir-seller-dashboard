@@ -8,8 +8,9 @@ import { HttpError } from "@/lib/classes/http-error";
 import { useRouter } from "next/navigation";
 import Button from "@/lib/ui/components/Button";
 import { loginSchema } from "./schema";
+import { ErrorMessage } from "@hookform/error-message";
 
-type LoginInputs = {
+export type LoginInputs = {
   email: string;
   password: string;
 };
@@ -19,7 +20,7 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { isLoading },
+    formState: { isLoading, errors },
   } = useForm<LoginInputs>({
     resolver: yupResolver(loginSchema),
   });
@@ -30,11 +31,10 @@ const LoginForm = () => {
 
   const onSuccess: SubmitHandler<LoginInputs> = async data => {
     try {
-      console.log("awd", data);
+      await authService.login(data);
 
-      // await authService.login();
-
-      // router.push("/");
+      // redirect to home on success
+      router.push("/");
     } catch (err: any) {
       throw new HttpError(
         500,
@@ -57,9 +57,13 @@ const LoginForm = () => {
         <div className="relative">
           <input
             type="email"
-            {...register("email", { required: true })}
+            {...register("email")}
             placeholder="Enter your email"
-            className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+            className={`w-full rounded-lg border py-4 pl-6 pr-10 bg-transparent dark:bg-form-input focus-visible:shadow-none outline-none ${
+              errors.email
+                ? "border-danger  dark:border-danger focus:border-danger dark:focus:border-danger"
+                : "border-stroke focus:border-primary dark:border-form-strokedark dark:focus:border-primary"
+            }`}
           />
 
           <span className="absolute right-4 top-4">
@@ -80,6 +84,11 @@ const LoginForm = () => {
             </svg>
           </span>
         </div>
+        <ErrorMessage
+          errors={errors}
+          name="email"
+          render={({ message }) => <p className="text-danger">{message}</p>}
+        />
       </div>
 
       <div className="mb-6">
@@ -91,7 +100,11 @@ const LoginForm = () => {
             type="password"
             {...register("password", { required: true })}
             placeholder="6+ Characters, 1 Capital letter"
-            className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+            className={`w-full rounded-lg border py-4 pl-6 pr-10 bg-transparent dark:bg-form-input focus-visible:shadow-none outline-none ${
+              errors.email
+                ? "border-danger  dark:border-danger focus:border-danger dark:focus:border-danger"
+                : "border-stroke focus:border-primary dark:border-form-strokedark dark:focus:border-primary"
+            }`}
           />
 
           <span className="absolute right-4 top-4">
@@ -116,6 +129,11 @@ const LoginForm = () => {
             </svg>
           </span>
         </div>
+        <ErrorMessage
+          errors={errors}
+          name="password"
+          render={({ message }) => <p className="text-danger">{message}</p>}
+        />
       </div>
 
       <div className="mb-5">
@@ -124,7 +142,8 @@ const LoginForm = () => {
         </Button>
       </div>
 
-      <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
+      {/* login with Google */}
+      {/* <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
         <span>
           <svg
             width="20"
@@ -159,7 +178,7 @@ const LoginForm = () => {
           </svg>
         </span>
         Login with Google
-      </button>
+      </button> */}
 
       <div className="mt-6 text-center">
         <p>

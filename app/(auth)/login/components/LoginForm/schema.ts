@@ -1,6 +1,7 @@
+import { Login } from "@/types/models";
 import * as yup from "yup";
 
-export const loginSchema = yup.object().shape({
+export const loginSchema: yup.ObjectSchema<Login> = yup.object().shape({
   email: yup
     .string()
     .required("Email is required")

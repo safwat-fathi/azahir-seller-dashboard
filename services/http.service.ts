@@ -20,10 +20,10 @@ export default class HttpClient {
           Accept: "application/json",
           "Accept-Language": "en",
         },
-        cache: "no-store",
-        next: {
-          revalidate: 0,
-        },
+        // cache: "no-store",
+        // next: {
+        //   revalidate: 0,
+        // },
         ...options,
       };
 

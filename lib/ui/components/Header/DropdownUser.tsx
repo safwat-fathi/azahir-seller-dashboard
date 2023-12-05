@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import authService from "@/app/(auth)/services/auth.service";
+import authService from "@/services/auth.service";
 
 const DropdownUser = () => {
   const router = useRouter();

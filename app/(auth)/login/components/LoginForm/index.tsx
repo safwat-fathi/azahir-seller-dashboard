@@ -2,13 +2,13 @@
 
 import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import authService from "../../../services/auth.service";
 import Link from "next/link";
 import { HttpError } from "@/lib/classes/http-error";
 import { useRouter } from "next/navigation";
 import Button from "@/lib/ui/components/Button";
 import { loginSchema } from "./schema";
 import { ErrorMessage } from "@hookform/error-message";
+import authService from "@/services/auth.service";
 
 export type LoginInputs = {
   email: string;
@@ -24,10 +24,6 @@ const LoginForm = () => {
   } = useForm<LoginInputs>({
     resolver: yupResolver(loginSchema),
   });
-
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [loading, setLoading] = useState(false);
 
   const onSuccess: SubmitHandler<LoginInputs> = async data => {
     try {
@@ -51,11 +47,15 @@ const LoginForm = () => {
     // <form onSubmit={e => e.preventDefault()}>
     <form onSubmit={handleSubmit(onSuccess, onError)}>
       <div className="mb-4">
-        <label className="mb-2.5 block font-medium text-black dark:text-white">
+        <label
+          className="mb-2.5 block font-medium text-black dark:text-white"
+          htmlFor="email"
+        >
           Email
         </label>
         <div className="relative">
           <input
+            id="email"
             type="email"
             {...register("email")}
             placeholder="Enter your email"
@@ -92,11 +92,15 @@ const LoginForm = () => {
       </div>
 
       <div className="mb-6">
-        <label className="mb-2.5 block font-medium text-black dark:text-white">
+        <label
+          className="mb-2.5 block font-medium text-black dark:text-white"
+          htmlFor="password"
+        >
           Password
         </label>
         <div className="relative">
           <input
+            id="password"
             type="password"
             {...register("password", { required: true })}
             placeholder="6+ Characters, 1 Capital letter"

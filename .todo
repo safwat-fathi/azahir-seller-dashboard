@@ -1,0 +1,11 @@
+# Todo
+
+## Products module
+
+- add product
+	- single
+	- bulk
+
+## Components
+
+- fix bread crumb to have chained links of current pathname

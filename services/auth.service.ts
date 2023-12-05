@@ -1,6 +1,6 @@
+import { createTokenAction, destroyTokenAction } from "@/app/(auth)/actions";
+import { LoginInputs } from "@/app/(auth)/login/components/LoginForm";
 import HttpClient from "@/services/http.service";
-import { createTokenAction, destroyTokenAction } from "../actions";
-import { LoginInputs } from "../login/components/LoginForm";
 
 class AuthService extends HttpClient {
   constructor() {
@@ -9,7 +9,7 @@ class AuthService extends HttpClient {
 
   public async login(data: LoginInputs) {
     try {
-      console.log("login data:", data);
+      // console.log("login data:", data);
 
       await createTokenAction("23|awdawdad");
 

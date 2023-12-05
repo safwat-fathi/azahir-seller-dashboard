@@ -14,3 +14,32 @@ export interface User {
   token: string;
   avatar: string;
 }
+
+export interface Login {
+  email: string;
+  password: string;
+}
+
+export interface Product {
+  id?: string;
+  name: string;
+  price: number;
+  description: string;
+  images: string;
+  thumbnail: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  deletedAt?: Date;
+  stock: number;
+  sold?: number;
+  discount?: number;
+  // reviews: Review[];
+  // ratings: Rating[];
+  // category: Category[];
+  // tags: Tag[];
+  // colors: Color[];
+  // sizes: Size[];
+  // attributes: Attribute[];
+  // variants: Variant[];
+  // wishlist: Wishlist[];
+}

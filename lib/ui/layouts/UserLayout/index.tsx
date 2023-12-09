@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect, ReactNode } from "react";
 import dynamic from "next/dynamic";
-import Loader from "@/lib/ui/components/Loader";
 import SidebarLoader from "../../components/SidebarLoader";
 
 const Sidebar = dynamic(() => import("@/lib/ui/components/Sidebar"), {
@@ -25,9 +24,6 @@ export default function UserLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="dark:bg-boxdark-2 dark:text-bodydark">
-      {/* {loading ? (
-        <Loader />
-      ) : ( */}
       <div className="flex h-screen overflow-hidden">
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
@@ -36,7 +32,6 @@ export default function UserLayout({ children }: { children: ReactNode }) {
           {children}
         </div>
       </div>
-      {/* )} */}
     </div>
   );
 }

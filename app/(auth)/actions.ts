@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function createTokenAction(token: string) {
+export async function onLoginAction(token: string) {
   cookies().set({
     name: "token",
     value: token,
@@ -11,12 +11,10 @@ export async function createTokenAction(token: string) {
     path: "/",
   });
 
-  console.log("token created");
+  redirect("/");
 }
 
-export async function destroyTokenAction() {
-  console.log("token destroyed");
-
+export async function onLogoutAction() {
   cookies().delete("token");
 
   redirect("/login");

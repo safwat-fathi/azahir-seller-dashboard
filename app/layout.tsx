@@ -3,7 +3,6 @@ import { Metadata } from "next";
 
 import "./globals.css";
 import "./data-tables-css.css";
-import "./satoshi.css";
 
 export const metadata: Metadata = {
   title: {

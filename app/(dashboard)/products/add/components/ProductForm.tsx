@@ -32,8 +32,6 @@ const ProductForm = () => {
     try {
       await productService.addProducts(data);
 
-      // redirect to home on success
-      router.push("/");
     } catch (err: any) {
       throw new HttpError(
         500,

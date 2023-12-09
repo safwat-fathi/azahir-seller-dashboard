@@ -1,4 +1,4 @@
-import { createTokenAction, destroyTokenAction } from "@/app/(auth)/actions";
+import { onLoginAction, onLogoutAction } from "@/app/(auth)/actions";
 import { LoginInputs } from "@/app/(auth)/login/components/LoginForm";
 import HttpClient from "@/services/http.service";
 
@@ -11,7 +11,7 @@ class AuthService extends HttpClient {
     try {
       // console.log("login data:", data);
 
-      await createTokenAction("23|awdawdad");
+      await onLoginAction("23|awdawdad");
 
       return;
     } catch (err) {
@@ -21,7 +21,7 @@ class AuthService extends HttpClient {
 
   public async logout() {
     try {
-      await destroyTokenAction();
+      await onLogoutAction();
 
       return;
     } catch (err) {

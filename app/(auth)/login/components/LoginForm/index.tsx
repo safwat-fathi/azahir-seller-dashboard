@@ -27,10 +27,12 @@ const LoginForm = () => {
 
   const onSuccess: SubmitHandler<LoginInputs> = async data => {
     try {
+      console.log(data);
+
       await authService.login(data);
 
       // redirect to home on success
-      router.push("/");
+      // router.push("/");
     } catch (err: any) {
       throw new HttpError(
         500,

@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import authService from "@/services/auth.service";
 
 const DropdownUser = () => {
-  const router = useRouter();
   const pathname = usePathname();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -15,8 +14,6 @@ const DropdownUser = () => {
 
   const handleLogout = async () => {
     await authService.logout();
-
-    router.push("/login");
   };
 
   // close on click outside
@@ -48,7 +45,6 @@ const DropdownUser = () => {
   // close if route changes
   useEffect(() => {
     setDropdownOpen(false);
-    console.log(pathname);
   }, [pathname]);
 
   return (

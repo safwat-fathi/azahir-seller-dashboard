@@ -1,11 +1,36 @@
 # Todo
 
-## Products module
+## Marketing module
+
+- offers
+- promo codes
+- loyal programme
+
+## Inventory module
+
+- edit product
+	- single
+	
+- delete product
+	- single
+	- bulk
 
 - add product
 	- single
 	- bulk
 
+- products table 
+	- in users carts count
+	- in users wish listed count
+	- by stock
+	- by category
+	- by rating
+	- by name
+	- by price
+	- by sales
+	- by views
+	- by conversion rate
+
 ## Components
 
-- fix bread crumb to have chained links of current pathname
+- fix bread crumb to have chained links of current pathname (check GAFI bread crumb)

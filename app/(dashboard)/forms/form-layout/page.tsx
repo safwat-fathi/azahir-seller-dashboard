@@ -1,5 +1,16 @@
 import Breadcrumb from "@/lib/ui/components/Breadcrumbs/Breadcrumb";
 import { Metadata } from "next";
+
+const breadCrumbList = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Form Layout",
+  },
+];
+
 export const metadata: Metadata = {
   title: "Form Layout Page | Next.js E-commerce Dashboard Template",
   description: "This is Form Layout page for TailAdmin Next.js",
@@ -9,7 +20,7 @@ export const metadata: Metadata = {
 const FormLayout = () => {
   return (
     <>
-      <Breadcrumb pageName="FormLayout" />
+      <Breadcrumb list={breadCrumbList} />
 
       <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
         <div className="flex flex-col gap-9">

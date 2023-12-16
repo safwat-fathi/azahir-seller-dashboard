@@ -5,7 +5,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: TVariant;
   color?: TColor;
   size?: TSize;
-  loading: boolean;
+  loading?: boolean;
 };
 
 const sizes = {

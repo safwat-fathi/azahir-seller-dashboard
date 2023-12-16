@@ -1,9 +1,19 @@
 import Breadcrumb from "@/lib/ui/components/Breadcrumbs/Breadcrumb";
 
-const Products = () => {
+const breadCrumbList = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Inventory",
+  },
+];
+
+const Inventory = () => {
   return (
     <div className="mx-auto max-w-270">
-      <Breadcrumb pageName="Products" />
+      <Breadcrumb list={breadCrumbList} />
       <div className="grid grid-cols-5 gap-8">
         <div className="col-span-5 xl:col-span-3">Content 1</div>
         <div className="col-span-5 xl:col-span-3">Content 2</div>
@@ -12,4 +22,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Inventory;

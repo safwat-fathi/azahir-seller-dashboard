@@ -32,5 +32,5 @@
 	- by conversion rate
 
 ## Components
-
-- fix bread crumb to have chained links of current pathname (check GAFI bread crumb)
+<!-- ✘ -->
+- ✔ fix bread crumb to have chained links of current pathname (check GAFI bread crumb)

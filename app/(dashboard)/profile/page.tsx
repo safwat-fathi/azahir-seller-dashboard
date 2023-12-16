@@ -2,6 +2,17 @@ import Breadcrumb from "@/lib/ui/components/Breadcrumbs/Breadcrumb";
 import Image from "next/image";
 
 import { Metadata } from "next";
+
+const breadCrumbList = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Profile",
+  },
+];
+
 export const metadata: Metadata = {
   title: "Profile Page | Next.js E-commerce Dashboard Template",
   description: "This is Profile page for TailAdmin Next.js",
@@ -11,7 +22,7 @@ export const metadata: Metadata = {
 const Profile = () => {
   return (
     <>
-      <Breadcrumb pageName="Profile" />
+      <Breadcrumb list={breadCrumbList} />
 
       <div className="overflow-hidden rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="relative z-20 h-35 md:h-65">

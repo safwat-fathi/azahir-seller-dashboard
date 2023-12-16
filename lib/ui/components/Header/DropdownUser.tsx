@@ -166,7 +166,7 @@ const DropdownUser = () => {
                   fill=""
                 />
               </svg>
-              Account Settings
+              Settings
             </Link>
           </li>
         </ul>

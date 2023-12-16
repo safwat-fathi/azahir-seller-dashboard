@@ -10,6 +10,17 @@ import SwitcherThree from "@/lib/ui/components/Switchers/SwitcherThree";
 import SwitcherTwo from "@/lib/ui/components/Switchers/SwitcherTwo";
 
 import { Metadata } from "next";
+
+const breadCrumbList = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Form Elements",
+  },
+];
+
 export const metadata: Metadata = {
   title: "Form Elements Page | Next.js E-commerce Dashboard Template",
   description: "This is Form Elements page for TailAdmin Next.js",
@@ -19,7 +30,7 @@ export const metadata: Metadata = {
 const FormElements = () => {
   return (
     <>
-      <Breadcrumb pageName="FormElements" />
+      <Breadcrumb list={breadCrumbList} />
 
       <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
         <div className="flex flex-col gap-9">

@@ -3,7 +3,17 @@ import Image from "next/image";
 
 import { Metadata } from "next";
 import Button from "@/lib/ui/components/Button";
-import Loader from "@/lib/ui/components/Loader";
+
+const breadCrumbList = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Settings",
+  },
+];
+
 export const metadata: Metadata = {
   title: "Settings Page | Next.js E-commerce Dashboard Template",
   description: "This is Settings page for TailAdmin Next.js",
@@ -13,7 +23,7 @@ export const metadata: Metadata = {
 const Settings = () => {
   return (
     <div className="mx-auto max-w-270">
-      <Breadcrumb pageName="Settings" />
+      <Breadcrumb list={breadCrumbList} />
 
       <div className="grid grid-cols-5 gap-8">
         <div className="col-span-5 xl:col-span-3">

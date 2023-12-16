@@ -1,7 +1,9 @@
 "use client";
+
 import { useState, useEffect, ReactNode } from "react";
 import dynamic from "next/dynamic";
-import SidebarLoader from "../../components/SidebarLoader";
+import SidebarLoader from "../../components/Loaders/SidebarLoader";
+import HeaderLoader from "../../components/Loaders/HeaderLoader";
 
 const Sidebar = dynamic(() => import("@/lib/ui/components/Sidebar"), {
   ssr: false,
@@ -10,7 +12,7 @@ const Sidebar = dynamic(() => import("@/lib/ui/components/Sidebar"), {
 
 const Header = dynamic(() => import("@/lib/ui/components/Header"), {
   ssr: false,
-  loading: () => <h1>Loading</h1>,
+  loading: () => <HeaderLoader />,
 });
 
 export default function UserLayout({ children }: { children: ReactNode }) {

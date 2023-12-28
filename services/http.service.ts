@@ -1,15 +1,29 @@
-import { destroyTokenAction, getTokenAction } from "@/app/(auth)/actions";
+import { onLogoutAction, getTokenAction } from "@/app/(auth)/actions";
 import { HttpError } from "@/lib/classes/http-error";
+import {
+  HttpServiceAbstract,
+  IPaginatedResponse,
+  IParams,
+  TMethod,
+} from "@/types/services";
 
-export default class HttpClient {
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL_API || "";
+export default class HttpService<T> extends HttpServiceAbstract<T> {
+  private _url: string;
   private _token: string | null = null;
   private _options: RequestInit = {};
 
-  private async _request<T = any>(
-    url: string,
+  constructor(url: string) {
+    super();
+    this._url = BASE_URL + url;
+  }
+
+  private async _request(
+    route: string,
     method: TMethod,
-    options: any
-  ): Promise<T | any> {
+    options?: RequestInit,
+    params?: IParams
+  ) {
     try {
       this._token = await getTokenAction();
 
@@ -27,76 +41,40 @@ export default class HttpClient {
         ...options,
       };
 
-      const response = await fetch(url, this._options);
+      const urlParams = params ? `?${new URLSearchParams(params)}` : "";
+
+      const fullURL = this._url + route + urlParams;
+
+      const response = await fetch(fullURL, this._options);
 
       // No content response
-      if (response.status === 204) {
-        return;
-      }
+      if (response.status === 204) return;
 
       if (!response.ok) {
         if (response.status === 401) {
-          await destroyTokenAction();
+          await onLogoutAction();
 
           throw new HttpError(401, "Unauthorized");
         }
 
-        if (response.status === 500) {
-          throw new HttpError(500, "Server error");
-        }
-
-        throw new HttpError(response.status, response.statusText);
+        throw new HttpError(
+          response.status || 500,
+          response.statusText || "Something went wrong"
+        );
       }
 
-      return response.json();
+      return await response.json();
     } catch (err) {
       throw err;
     }
   }
 
-  public async get<T = any>(url: string, headers?: TObj<string, string>) {
-    try {
-      return await this._request<T>(url, "GET", headers);
-    } catch (err) {
-      throw err;
-    }
-  }
+  protected async getList(
+    params?: IParams,
+    options?: RequestInit | undefined
+  ): Promise<IPaginatedResponse<T>> {
+    const data = await this._request("/", "GET", options, params);
 
-  public async post<T = any>(
-    url: string,
-    body: string | FormData,
-    headers?: TObj<string, string>
-  ) {
-    try {
-      const options: RequestInit = { headers, body };
-
-      return await this._request<T>(url, "POST", options);
-    } catch (err) {
-      throw err;
-    }
-  }
-
-  public async put<T = any>(
-    url: string,
-    body: string | FormData,
-    headers?: TObj<string, string>
-  ) {
-    try {
-      const options: RequestInit = { headers, body };
-
-      return await this._request<T>(url, "PUT", options);
-    } catch (err) {
-      throw err;
-    }
-  }
-
-  public async delete<T = any>(url: string, headers?: TObj<string, string>) {
-    try {
-      const options: RequestInit = { headers };
-
-      return await this._request<T>(url, "DELETE", options);
-    } catch (err) {
-      throw err;
-    }
+    return data;
   }
 }

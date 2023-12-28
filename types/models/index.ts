@@ -21,25 +21,16 @@ export interface Login {
 }
 
 export interface Product {
-  id?: string;
+  _id: string;
   name: string;
-  price: number;
+  brand: string;
   description: string;
-  images: string;
-  thumbnail: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  deletedAt?: Date;
+  slug: string;
+  price: number;
   stock: number;
-  sold?: number;
-  discount?: number;
-  // reviews: Review[];
-  // ratings: Rating[];
-  // category: Category[];
-  // tags: Tag[];
-  // colors: Color[];
-  // sizes: Size[];
-  // attributes: Attribute[];
-  // variants: Variant[];
-  // wishlist: Wishlist[];
+  rating: number;
+  discountPercentage: number;
+  thumbnail: string;
+  images: string[];
+  categories: string[];
 }

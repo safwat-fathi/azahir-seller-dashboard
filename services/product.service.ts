@@ -1,21 +1,24 @@
-import HttpClient from "@/services/http.service";
+import HttpService from "@/services/http.service";
+import { Product } from "@/types/models";
+import { IParams } from "@/types/services";
 
-class ProductService extends HttpClient {
+class ProductService extends HttpService<Product> {
   constructor() {
-    super();
+    super("/products");
   }
 
-  public async getProducts(data: any) {
+  public async getProducts(params?: IParams) {
     try {
-      // console.log("login data:", data);
+      const data = await this.getList(params);
+      console.log("🚀 ~ getProducts ~ data:", data);
 
-      return;
+      return data;
     } catch (err) {
       throw err;
     }
   }
 
-  public async addProducts(data: any | any[]) {
+  public async add(data: any | any[]) {
     try {
       return;
     } catch (err) {
@@ -24,6 +27,4 @@ class ProductService extends HttpClient {
   }
 }
 
-const productService = new ProductService();
-
-export default productService;
+export default new ProductService();

@@ -271,7 +271,7 @@ const SidebarNav = ({ sidebarExpanded, setSidebarExpanded }: Props) => {
                         width="20"
                         height="20"
                         viewBox="0 0 256 253"
-                        enable-background="new 0 0 256 253"
+                        enableBackground="new 0 0 256 253"
                       >
                         <path
                           d="M122,219H76v-45h18v14h10v-14h18V219z M182,219h-46v-45h18v14h10v-14h18V219z M152,160h-46v-45h18v14h10v-14h18V160z M2,69

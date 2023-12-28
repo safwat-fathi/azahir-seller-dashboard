@@ -34,3 +34,5 @@
 ## Components
 <!-- ✘ -->
 - ✔ fix bread crumb to have chained links of current pathname (check GAFI bread crumb)
+- empty state 
+- pagination layout

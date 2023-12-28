@@ -6,23 +6,27 @@ import AuthImage from "../components/AuthImage";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Login Page",
+  title: "Login",
   description: "This is login page for Azahir dashboard",
 };
 
-const Login = async () => {
+const isLoggedIn = () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token");
 
   if (token?.value) {
     redirect("/");
   }
+};
+
+const Login = () => {
+  isLoggedIn();
 
   return (
     <main>
       <div className="flex flex-wrap items-center h-screen">
         <div className="hidden w-full xl:block xl:w-1/2">
-          <div className="py-17.5 px-26 text-center">
+          <div className="py-17.5 px-26 text-center flex flex-col items-center justify-center">
             <div className="mb-5.5 inline-block">
               <Image
                 className="hidden dark:block"

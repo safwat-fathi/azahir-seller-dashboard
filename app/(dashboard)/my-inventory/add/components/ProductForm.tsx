@@ -30,13 +30,13 @@ const ProductForm = () => {
 
   const onSuccess: SubmitHandler<Product> = async data => {
     try {
-      await productService.addProducts(data);
-
+      // await productService.addProducts(data);
     } catch (err: any) {
-      throw new HttpError(
-        500,
-        err.status ? err.status : "Something went wrong"
-      );
+      // throw new HttpError(
+      //   500,
+      //   err.status ? err.status : "Something went wrong"
+      // );
+      throw err;
     }
   };
 

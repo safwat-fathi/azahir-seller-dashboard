@@ -7,7 +7,8 @@ export async function onLoginAction(token: string) {
   cookies().set({
     name: "token",
     value: token,
-    // httpOnly: true,
+    httpOnly: true,
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
     path: "/",
   });
 

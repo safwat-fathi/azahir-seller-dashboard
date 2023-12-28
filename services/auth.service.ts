@@ -1,12 +1,8 @@
 import { onLoginAction, onLogoutAction } from "@/app/(auth)/actions";
 import { LoginInputs } from "@/app/(auth)/login/components/LoginForm";
-import HttpClient from "@/services/http.service";
+import HttpService from "@/services/http.service";
 
-class AuthService extends HttpClient {
-  constructor() {
-    super();
-  }
-
+class AuthService {
   public async login(data: LoginInputs) {
     try {
       // console.log("login data:", data);
@@ -31,10 +27,9 @@ class AuthService extends HttpClient {
 
   public async test() {
     try {
-      // const res = await httpClient.get("http://localhost:8000/api/products");
-      const res = await this.get("http://localhost:8000/api/products");
-
-      return res;
+      // const res = await HttpService.get("http://localhost:8000/api/products");
+      // const res = await this.get("http://localhost:8000/api/products");
+      // return res;
     } catch (err) {
       throw err;
     }
